@@ -11,7 +11,18 @@ const routes = [
         multipart: true
       }
     }
+  },
+
+  {
+    path: '/',
+    method: 'GET',
+    handler: (request, h) => {
+      return 'Hello, world!';
+  },
+    
   }
+
+
 ]
  
 module.exports = routes;
