@@ -3,7 +3,8 @@ require('dotenv').config();
 const Hapi = require('@hapi/hapi');
 const routes = require('../server/routes');
 const loadModel = require('../services/loadModel');
- 
+const InputError = require('../exceptions/InputError');
+
 (async () => {
     const server = Hapi.server({
         port: 3000,
@@ -18,11 +19,17 @@ const loadModel = require('../services/loadModel');
     const model_angka = await loadModel('angka');
     const model_huruf = await loadModel('huruf');
 
-    server.app.model = {
-        'angka': model_angka,
-        'huruf': model_huruf
-    };
+    if (!model_angka){
+        console.log('model tidak ke load');
+    }
+    //server.app.model = {
+    //    'angka': model_angka,
+    //    'huruf': model_huruf
+    //};
  
+    server.app.model_angka = model_angka;
+    server.app.model_huruf = model_huruf;
+
     server.route(routes);
  
     server.ext('onPreResponse', function (request, h) {
