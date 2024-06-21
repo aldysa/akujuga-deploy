@@ -20,10 +20,6 @@ class_names = [
     'Halo', 'Tidur', 'Kamu', 'Makan', 'Saya'
 ]
 
-# initialize tflite interpreter
-# interpreter = tf.lite.Interpreter(model_path=model_path)
-# interpreter.allocate_tensors()
-
 interpreter = None
 
 def download_model():
@@ -42,9 +38,6 @@ def load_model():
     model_kata = tf.keras.models.load_model(model_local_path)
 
 def preprocess_image(image):
-
-    # preprocess image before making a prediction
-    # resize image to 224x224 pixels and apply preprocessing specific to the efficientnet model
 
     image = Image.open(image_path).convert('L')
     image = image.resize((30, 258))
